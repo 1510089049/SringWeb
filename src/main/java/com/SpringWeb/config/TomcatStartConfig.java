@@ -1,7 +1,12 @@
 package com.SpringWeb.config;
 
 
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterRegistration;
+import javax.servlet.ServletContext;
 
 public class TomcatStartConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -18,6 +23,13 @@ public class TomcatStartConfig extends AbstractAnnotationConfigDispatcherServlet
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding("UTF-8");
+        return new Filter[]{filter};
     }
 }
 
